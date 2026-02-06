@@ -166,4 +166,4 @@ This tool is intended for **authorized security research only**. Only scan domai
 
 ---
 
-**SPECTRE v1.0** • *Ghost Protocol Active* 👻
+**SPECTRE v1.0** 
