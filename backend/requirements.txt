@@ -1,0 +1,5 @@
+fastapi==0.109.0
+uvicorn==0.27.0
+python-whois==0.9.4
+requests==2.31.0
+aiohttp==3.9.1

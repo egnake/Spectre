@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectre</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <div class="ghost-icon-svg">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="ghostGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#bf00ff"/>
+                                <stop offset="100%" style="stop-color:#00f0ff"/>
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path d="M16 2C9.373 2 4 7.373 4 14v10c0 1.5 1.2 2 2 1.5l2-1.5 2 2 2-2 2 2 2-2 2 2 2-2 2 1.5c.8.5 2 0 2-1.5V14c0-6.627-5.373-12-12-12z" 
+                              stroke="url(#ghostGradient)" 
+                              stroke-width="2" 
+                              fill="none"
+                              filter="url(#glow)"/>
+                        <circle cx="11" cy="14" r="2" fill="url(#ghostGradient)"/>
+                        <circle cx="21" cy="14" r="2" fill="url(#ghostGradient)"/>
+                        <path d="M8 20h4M14 22h4M20 20h4" stroke="rgba(191,0,255,0.3)" stroke-width="0.5"/>
+                    </svg>
+                </div>
+                <h1 class="logo">SPECTRE</h1>
+            </div>
+            <div class="subtitle">Domain Reconnaissance</div>
+        </header>
+
+        <!-- Target Domain Display -->
+        <div class="target-section">
+            <div class="target-label">TARGET</div>
+            <div class="target-domain" id="targetDomain">Initializing...</div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="radar-container">
+                <div class="radar-ring"></div>
+                <div class="radar-ring delay-1"></div>
+                <div class="radar-ring delay-2"></div>
+                <div class="radar-sweep"></div>
+                <div class="radar-center"></div>
+            </div>
+            <div class="loading-text">SCANNING TARGET...</div>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" id="errorContainer" style="display: none;">
+            <div class="error-icon-svg">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="20" stroke="#ff3366" stroke-width="2" fill="rgba(255,51,102,0.1)"/>
+                    <path d="M24 14v12M24 30v4" stroke="#ff3366" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="error-title">SCAN FAILED</div>
+            <div class="error-message" id="errorMessage"></div>
+            <button class="retry-btn" id="retryBtn">RETRY SCAN</button>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <!-- Scan Info Bar -->
+            <div class="scan-info">
+                <span class="scan-time" id="scanTime"></span>
+                <span class="scan-status">COMPLETE</span>
+            </div>
+
+            <!-- WHOIS Section -->
+            <div class="section" id="whoisSection">
+                <div class="section-header" onclick="toggleSection('whois')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">WHOIS INTEL</div>
+                    <div class="section-status" id="whoisStatus"></div>
+                    <div class="chevron" id="whoisChevron">▼</div>
+                </div>
+                <div class="section-content" id="whoisContent">
+                    <div class="data-grid" id="whoisData"></div>
+                </div>
+            </div>
+
+            <!-- IP & Hosting Section -->
+            <div class="section" id="ipSection">
+                <div class="section-header" onclick="toggleSection('ip')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2 8h12M8 2c-2 2-2 10 0 12M8 2c2 2 2 10 0 12" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">IP & HOSTING</div>
+                    <div class="section-status" id="ipStatus"></div>
+                    <div class="chevron" id="ipChevron">▼</div>
+                </div>
+                <div class="section-content" id="ipContent">
+                    <div class="data-grid" id="ipData"></div>
+                </div>
+            </div>
+
+            <!-- SSL Section -->
+            <div class="section" id="sslSection">
+                <div class="section-header" onclick="toggleSection('ssl')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <rect x="3" y="7" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M5 7V5a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">SSL CERTIFICATE</div>
+                    <div class="section-status" id="sslStatus"></div>
+                    <div class="chevron" id="sslChevron">▼</div>
+                </div>
+                <div class="section-content" id="sslContent">
+                    <div class="data-grid" id="sslData"></div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Section -->
+            <div class="section" id="techSection">
+                <div class="section-header" onclick="toggleSection('tech')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 2l6 3v6l-6 3-6-3V5l6-3z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M8 8v6M2 5l6 3 6-3" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">TECH STACK</div>
+                    <div class="section-status" id="techStatus"></div>
+                    <div class="chevron" id="techChevron">▼</div>
+                </div>
+                <div class="section-content" id="techContent">
+                    <div class="data-grid" id="techData"></div>
+                </div>
+            </div>
+
+            <!-- Subdomains Section -->
+            <div class="section" id="subdomainsSection">
+                <div class="section-header" onclick="toggleSection('subdomains')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                            <circle cx="3" cy="3" r="1.5" stroke="currentColor"/>
+                            <circle cx="13" cy="3" r="1.5" stroke="currentColor"/>
+                            <circle cx="3" cy="13" r="1.5" stroke="currentColor"/>
+                            <circle cx="13" cy="13" r="1.5" stroke="currentColor"/>
+                            <path d="M6 6L4 4M10 6l2-2M6 10l-2 2M10 10l2 2" stroke="currentColor" stroke-width="0.75"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">SUBDOMAINS</div>
+                    <div class="section-status" id="subdomainsStatus"></div>
+                    <div class="chevron" id="subdomainsChevron">▼</div>
+                </div>
+                <div class="section-content" id="subdomainsContent">
+                    <div class="subdomain-list" id="subdomainsList"></div>
+                </div>
+            </div>
+
+            <!-- Historical Data Section (Pro Feature) -->
+            <div class="section pro-section" id="historicalSection">
+                <div class="section-header" onclick="toggleSection('historical')">
+                    <div class="section-icon-svg">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M8 4v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="section-title">HISTORICAL DATA</div>
+                    <div class="pro-badge">PRO</div>
+                    <div class="chevron" id="historicalChevron">▼</div>
+                </div>
+                <div class="section-content" id="historicalContent">
+                    <div class="data-grid" id="historicalData"></div>
+                </div>
+            </div>
+
+            <!-- Rescan Button -->
+            <button class="rescan-btn" id="rescanBtn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M1 7a6 6 0 1011.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M1 3v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                RESCAN DOMAIN
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-text">SPECTRE • egnake</div>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

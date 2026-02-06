@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Spectre",
+    "version": "1.0.0",
+    "description": "Stealthy one-click reconnaissance tool for security researchers. Analyze domains instantly.",
+    "author": "egnake",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        },
+        "default_title": "Spectre - Domain Reconnaissance"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "http://localhost:8000/*"
+    ],
+    "minimum_chrome_version": "88"
+}
