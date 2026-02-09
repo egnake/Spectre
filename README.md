@@ -56,14 +56,14 @@ Spectre/
 ### Step 1: Install Backend Dependencies
 
 ```powershell
-cd c:\Users\Egcae\OneDrive\Masaüstü\Desktop\Isler\Spectre\backend
+cd Spectre\backend
 pip install -r requirements.txt
 ```
 
 ### Step 2: Start the Backend Server
 
 ```powershell
-cd c:\Users\Egcae\OneDrive\Masaüstü\Desktop\Isler\Spectre\backend
+cd Spectre\backend
 python -m uvicorn main:app --reload --port 8000
 ```
 
@@ -89,7 +89,7 @@ Before loading the extension, create placeholder icons or use the provided ones:
 1. Open Chrome and navigate to: `chrome://extensions/`
 2. Enable **Developer mode** (toggle in top-right)
 3. Click **"Load unpacked"**
-4. Select the `extension` folder: `c:\Users\Egcae\OneDrive\Masaüstü\Desktop\Isler\Spectre\extension`
+4. Select the `extension` folder: `Spectre\extension`
 5. The Spectre icon (👻) should appear in your toolbar
 
 ### Step 5: Use Spectre
