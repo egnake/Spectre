@@ -1,8 +1,3 @@
-"""
-Spectre Scanner Module
-All reconnaissance functions with async support
-"""
-
 import socket
 import ssl
 import asyncio
@@ -44,9 +39,7 @@ async def run_in_executor(func, *args):
     return await loop.run_in_executor(executor, func, *args)
 
 
-# =============================================================================
 # WHOIS & REGISTRAR INTELLIGENCE
-# =============================================================================
 def _whois_lookup_sync(domain: str) -> Dict[str, Any]:
     """Synchronous Whois lookup"""
     try:
@@ -110,9 +103,7 @@ async def whois_lookup(domain: str) -> Dict[str, Any]:
     return await run_in_executor(_whois_lookup_sync, domain)
 
 
-# =============================================================================
 # IP & HOSTING ANALYSIS
-# =============================================================================
 def _ip_analysis_sync(domain: str) -> Dict[str, Any]:
     """Synchronous IP and hosting analysis"""
     try:
@@ -188,9 +179,7 @@ async def ip_analysis(domain: str) -> Dict[str, Any]:
     return await run_in_executor(_ip_analysis_sync, domain)
 
 
-# =============================================================================
 # SSL/TLS CERTIFICATE AUDIT
-# =============================================================================
 def _ssl_analysis_sync(domain: str) -> Dict[str, Any]:
     """Synchronous SSL certificate analysis"""
     try:
@@ -257,9 +246,7 @@ async def ssl_analysis(domain: str) -> Dict[str, Any]:
     return await run_in_executor(_ssl_analysis_sync, domain)
 
 
-# =============================================================================
 # HISTORICAL DATA (MOCK)
-# =============================================================================
 async def get_historical_data(domain: str) -> Dict[str, Any]:
     """Generate mock historical data for Pro Feature demonstration"""
     # Simulated historical data
@@ -283,9 +270,7 @@ async def get_historical_data(domain: str) -> Dict[str, Any]:
     }
 
 
-# =============================================================================
 # SUBDOMAIN DISCOVERY (crt.sh)
-# =============================================================================
 def _subdomain_discovery_sync(domain: str) -> Dict[str, Any]:
     """Synchronous subdomain discovery via Certificate Transparency"""
     try:
@@ -343,9 +328,7 @@ async def subdomain_discovery(domain: str) -> Dict[str, Any]:
     return await run_in_executor(_subdomain_discovery_sync, domain)
 
 
-# =============================================================================
 # TECH STACK & VULNERABILITY DETECTION
-# =============================================================================
 def _tech_detection_sync(domain: str) -> Dict[str, Any]:
     """Synchronous technology and CVE detection"""
     try:
@@ -451,9 +434,7 @@ async def tech_detection(domain: str) -> Dict[str, Any]:
     return await run_in_executor(_tech_detection_sync, domain)
 
 
-# =============================================================================
-# FULL SCAN ORCHESTRATOR
-# =============================================================================
+# FULL SCAN
 async def full_scan(domain: str) -> Dict[str, Any]:
     """Execute all scans concurrently and return combined results"""
     start_time = datetime.now()
