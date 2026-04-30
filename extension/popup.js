@@ -1,8 +1,3 @@
-/**
- * Spectre - Domain Reconnaissance Extension
- * Popup JavaScript Controller
- */
-
 // API Configuration
 const API_BASE = 'http://localhost:8000';
 
