@@ -1,8 +1,3 @@
-"""
-Spectre Backend API
-FastAPI application for domain reconnaissance
-"""
-
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
