@@ -1,4 +1,4 @@
-# 🔮 SPECTRE
+# SPECTRE
 
 **Stealthy Domain Reconnaissance Tool for Security Researchers**
 
