@@ -18,9 +18,9 @@ Spectre/
 │   └── requirements.txt     # Python dependencies
 │
 ├── extension/
-│   ├── manifest.json        # Chrome Extension manifest (V3)
+│   ├── manifest.json        # Chrome Extension manifest
 │   ├── popup.html           # Extension popup UI
-│   ├── styles.css           # Cyberpunk theme styles
+│   ├── styles.css           # theme styles
 │   ├── popup.js             # Frontend logic
 │   └── icons/               # Extension icons
 │       ├── icon16.png
@@ -118,8 +118,6 @@ curl "http://localhost:8000/scan?domain=google.com"
 ---
 
 ## 🎨 UI Theme
-
-The extension features a **Cyberpunk/Ghost** aesthetic:
 
 - **Background**: `#0a0a0a` (Deep black)
 - **Primary Accent**: `#bf00ff` (Neon purple)
