@@ -2,7 +2,7 @@
 
 **Stealthy Domain Reconnaissance Tool for Security Researchers**
 
-A Cyberpunk/Ghost themed Chrome Extension paired with a high-performance Python FastAPI backend for instant domain intelligence.
+Chrome Extension paired with a high-performance Python FastAPI backend for instant domain intelligence.
 
 ![Spectre Logo](extension/icons/icon128.png)
 
